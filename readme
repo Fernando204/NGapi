@@ -1,0 +1,27 @@
+# 🚀 Neogenesis API
+
+Bem-vindo à **Neogenesis API**!  
+Este é o backend responsável por conectar todas as aplicações da Neogenesis ao banco de dados, além de realizar o processamento e gerenciamento de informações de forma rápida, segura e eficiente.
+
+---
+
+## 📚 Sobre o projeto
+
+A Neogenesis API foi desenvolvida para ser a ponte entre as aplicações e os dados, garantindo:
+
+- 🔗 Comunicação segura e estável com o banco de dados
+- ⚙️ Processamento ágil de informações
+- 📈 Escalabilidade para acompanhar o crescimento das aplicações
+- 🔒 Foco em segurança e integridade dos dados
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+- Java
+- Spring Boot
+- MySQL / MongoDB (dependendo da configuração)
+- Docker 
+- GitHub Actions (para CI/CD)
+
+---
