@@ -251,7 +251,7 @@ public  class Coins {
 
             lastValue.clear();
             lastValue.put(data, latestValue(new File(solFile)));
-            saveArchive("db/lastSOLprice.json", lastValue);
+            saveArchive("db/lastSOLprice.json", lastValue);//moeda solana
             
             saveArchive(btcFile, new HashMap<>());
             saveArchive(eurFile, new HashMap<>());
