@@ -21,6 +21,8 @@ public  class Coins {
     private String btcFile = "db/bitcoinValue.json";
     private String usdFile =  "db/EURvalues.json";
     private String eurFile = "db/USDtoBrl.json";
+    private String ethFile = "db/ethereumValue.json";
+    private String solFile = "db/solanaValue.json";
 
     private void createDBdir(){
         File pasta = new File("db");
@@ -223,7 +225,7 @@ public  class Coins {
         saveEURvalue(restTemplate, url2);
     }
 
-    @Scheduled(cron = "1 13 9 * * *")
+    @Scheduled(cron = "1 35 15 * * *")
     public void clearCoinsPrice(){
         try{
             LocalDateTime time = LocalDateTime.now();//retorna a data atual
@@ -242,10 +244,20 @@ public  class Coins {
             lastValue.clear();
             lastValue.put(data, latestValue(new File(eurFile)));
             saveArchive("db/lastEURprice.json", lastValue);
+
+            lastValue.clear();
+            lastValue.put(data, latestValue(new File(ethFile)));
+            saveArchive("db/lastETHprice.json", lastValue);
+
+            lastValue.clear();
+            lastValue.put(data, latestValue(new File(solFile)));
+            saveArchive("db/lastSOLprice.json", lastValue);
             
             saveArchive(btcFile, new HashMap<>());
             saveArchive(eurFile, new HashMap<>());
             saveArchive(usdFile, new HashMap<>());
+            saveArchive(ethFile, new HashMap<>());
+            saveArchive(solFile, new HashMap<>());
 
         }catch(Exception ex){
             ex.printStackTrace();
