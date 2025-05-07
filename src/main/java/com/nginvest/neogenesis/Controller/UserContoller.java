@@ -1,15 +1,16 @@
-package com.nginvest.neogenesis;
+package com.nginvest.neogenesis.Controller;
 
-import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.nginvest.neogenesis.DTO.LoginRequest;
+import com.nginvest.neogenesis.Model.User;
+import com.nginvest.neogenesis.Repository.UserRepository;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

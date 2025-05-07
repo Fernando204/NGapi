@@ -1,7 +1,6 @@
-package com.nginvest.neogenesis;
+package com.nginvest.neogenesis.DTO;
 
-import jakarta.persistence.Entity;
-
+//dto
 public class LoginRequest{
     private String email;
     private String password;

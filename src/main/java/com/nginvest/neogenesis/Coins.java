@@ -141,7 +141,7 @@ public  class Coins {
         System.out.println("Consultando a url: "+url);
 
         try{
-            Map<String,Object> response = restTemplate.getForObject(url, HashMap.class);
+            Map<String,Object> response =(Map<String,Object>) restTemplate.getForObject(url, HashMap.class);
             Map<String,Object> response2 = restTemplate.getForObject(url2, HashMap.class);
             Map<String,Object> db = new HashMap<>();
 

@@ -1,4 +1,4 @@
-package com.nginvest.neogenesis;
+package com.nginvest.neogenesis.Controller;
 
 import java.io.File;
 import java.util.HashMap;
@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nginvest.neogenesis.Coins;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -51,6 +53,12 @@ public class CoinControll{
         return result;
     }//localhost:8080/coin?base=btc
 
+    @GetMapping("/test")
+    public String getMethodName(@RequestParam String cor) {
+        return "<style>body{background: "+cor+"}</style>";
+    }
+    
+
     @GetMapping("/min")
     public Map<String,Double> minValue(@RequestParam List<String> base){
         Map<String,Double> response = new HashMap<>();
@@ -73,10 +81,12 @@ public class CoinControll{
                 case "ETH":
                     map = coin.minOrMaxValue(new File("db/ethereumValue.json"), s, listaStrings, 1);
                     break;
-                case "SOl":
+                case "SOL":
                     map = coin.minOrMaxValue(new File("db/solanaValue.json"), s, listaStrings, 1);
+                    System.out.println(map);
                     break;
                 default:
+                    response.put("Default", 0.0);
                     break;
             }
             response.putAll(map);
@@ -90,7 +100,8 @@ public class CoinControll{
         Map<String,Double> map = new HashMap<>();
 
         for(String s : base){
-            switch (s) {
+            String[] listaStrings = {"brl","usd","eur"};
+            switch (s.toUpperCase()) {
                 case "USD":
                     String[] list = {"BRL","EUR"};
                     map = coin.minOrMaxValue(new File("db/USDtoBrl.json"), s,list, 0);
@@ -100,10 +111,17 @@ public class CoinControll{
                     map = coin.minOrMaxValue(new File("db/EURvalues.json"), s,lista, 0);
                     break;
                 case "BTC":
-                    String[] listaStrings = {"brl","usd","eur"};
                     map = coin.minOrMaxValue(new File("db/bitcoinValue.json"), s,listaStrings, 0);
                     break;
+                case "ETH":
+                    map = coin.minOrMaxValue(new File("db/ethereumValue.json"), s, listaStrings, 0);
+                    break;
+                case "SOL":
+                    map = coin.minOrMaxValue(new File("db/solanaValue.json"), s, listaStrings, 0);
+                    System.out.println(map);
+                    break;
                 default:
+                    response.put("default", 0.0);
                     break;
             }
             response.putAll(map);
