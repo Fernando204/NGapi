@@ -10,4 +10,5 @@ import com.nginvest.neogenesis.Model.Investimento;
 public interface InvestRepository extends JpaRepository<Investimento,Long> {
     List<Investimento> findByUserId(long userId);
     Optional<Investimento> findById(long id);
+    boolean existsById(long id);
 }

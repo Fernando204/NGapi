@@ -36,7 +36,7 @@ public  class Coins {
                 System.out.println("erro ao criar pasta");
             }
         }else{
-            System.out.println("pasta db já existe");
+            return;
         }
     }
 
@@ -107,13 +107,11 @@ public  class Coins {
         }
     }
     private void saveBTCprice(String cripto,String sigla,RestTemplate restTemplate,String url){
-        System.out.println("consultando a url: "+url);
 
         try{
             Map<String,Object> db = new HashMap<>();
             Map<String,Object> response = restTemplate.getForObject(url, Map.class);
             Map<String,Number> rates = (Map<String,Number>) response.get(cripto);
-            System.out.println(rates);
             
             File file = new File("db/"+cripto+"Value.json");
 
@@ -138,7 +136,6 @@ public  class Coins {
         }
     }
     private void saveUsd(RestTemplate restTemplate, String url,String url2){
-        System.out.println("Consultando a url: "+url);
 
         try{
             Map<String,Object> response =(Map<String,Object>) restTemplate.getForObject(url, HashMap.class);
@@ -156,7 +153,7 @@ public  class Coins {
 
             Map<String,Object> values = new HashMap<>();
             Map<String,Number> usdValue = (Map<String,Number>) response.get("usd");
-            System.out.println(usdValue);
+      
             values.put("BRLtoUSD",usdValue.get("brl"));
             usdValue = (Map<String,Number>) response2.get("rates");
             values.put("EURtoUSD", usdValue.get("EUR"));
@@ -206,6 +203,7 @@ public  class Coins {
    
     @Scheduled(cron = "3 */2 * * * *")
     public void getCoinsPrice(){
+        System.out.println("coletando dados das Moedas...");
         createDBdir();
 
         String url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,brl,eur";
@@ -223,6 +221,7 @@ public  class Coins {
 
         saveUsd(restTemplate, url1,url3);
         saveEURvalue(restTemplate, url2);
+        System.out.println("Dados Salvos");
     }
 
     @Scheduled(cron = "1 35 15 * * *")
